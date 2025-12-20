@@ -72,7 +72,7 @@ export function ExperienceSection() {
                   <ul className="space-y-1.5">
                     {exp.description.map((desc, i) => (
                       <li key={i} className="text-sm text-muted-foreground">
-                        • {desc}
+                        {desc}
                       </li>
                     ))}
                   </ul>
