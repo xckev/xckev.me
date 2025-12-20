@@ -1,8 +1,10 @@
 import { resumeData } from "@/lib/data/resume-data";
 import { Separator } from "@/components/ui/separator";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 export function ProjectsSection() {
   const { projects } = resumeData;
@@ -13,38 +15,39 @@ export function ProjectsSection() {
         <h2 className="text-2xl font-bold mb-4">Projects</h2>
         <Separator className="mb-6" />
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {projects.map((project, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="pb-3">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1">
-                  <CardTitle className="text-base">
-                    {project.name}
-                  </CardTitle>
-                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <Calendar className="h-3 w-3" />
-                    <span>{project.date}</span>
-                  </div>
+            <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col p-0">
+              {/* Project Image */}
+              {project.image && (
+                <div className="relative w-full h-50 bg-muted">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <p className="text-sm text-muted-foreground">{project.description}</p>
-              </CardHeader>
-              <CardContent className="space-y-3 pt-0">
-                <div>
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <Trophy className="h-4 w-4 text-primary" />
-                    <h3 className="text-sm font-semibold">Achievements</h3>
+              )}
+
+              <CardContent className="pt-0 pb-4 flex flex-col flex-1">
+                {/* Header */}
+                <div className="mb-3">
+                  <div className="flex items-start justify-between gap-1 mb-1">
+                    <h3 className="font-semibold text-base text-foreground">
+                      {project.name}
+                    </h3>
+                    <span className="text-xs text-muted-foreground shrink-0">
+                      {project.date}
+                    </span>
                   </div>
-                  <ul className="space-y-1">
-                    {project.achievements.map((achievement, i) => (
-                      <li key={i} className="text-sm text-muted-foreground">
-                        • {achievement}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
 
-                <div>
-                  <h3 className="text-sm font-semibold mb-2">Technologies</h3>
+                {/* Technologies */}
+                <div className="mb-3">
                   <div className="flex flex-wrap gap-1.5">
                     {project.technologies.map((tech, i) => (
                       <Badge key={i} variant="secondary" className="text-xs">
@@ -53,6 +56,27 @@ export function ProjectsSection() {
                     ))}
                   </div>
                 </div>
+
+                {/* Link Button */}
+                {project.link && (
+                  <div className="mt-auto">
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="w-full gap-2"
+                    >
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        View Project
+                      </a>
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}

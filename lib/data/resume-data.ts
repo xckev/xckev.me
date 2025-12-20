@@ -35,6 +35,7 @@ export interface Project {
   description: string;
   achievements: string[];
   technologies: string[];
+  image?: string;
   link?: string;
   github?: string;
 }
@@ -146,19 +147,21 @@ export const resumeData: ResumeData = {
       name: "Sussi",
       date: "June 2025",
       description:
-        "Developed an intelligent student laptop monitoring system with quick classroom insights and automation",
+        "Intelligent student laptop monitoring system with quick classroom insights and automation. Won 1st place at Meta Llama 4 Seattle Hackathon against 200+ competitors and gained pre-seed investor attention.",
       achievements: [
         "Placed 1st at Meta Llama 4 Seattle Hackathon, competing against 200+ top college and full-time competitors",
         "Built a Next.js teacher client and a SwiftUI MacOS student client that interface through MongoDB Atlas",
         "Gained pre-seed investor attention for startup potential and interviewed with Afore VC",
       ],
       technologies: ["Next.js", "SwiftUI", "MongoDB", "Llama 4 API"],
+      image: "/projects/sussi.png",
+      link: "https://www.youtube.com/watch?v=9fk_h4dAfGA",
     },
     {
       name: "Triage",
       date: "October 2024",
       description:
-        "Developed an AI disaster assessment and detection tool using satellite imagery to improve emergency response",
+        "AI disaster assessment and detection tool using satellite imagery to improve emergency response. Won 1st place out of 1000+ participants at DubHacks '24, the largest hackathon in the Pacific Northwest.",
       achievements: [
         "Placed 1st out of 1000+ participants at DubHacks '24, the largest hackathon in the Pacific Northwest",
         "Built with Next.js frontend, Python Flask backend, Intel Tiber hosting, and AWS CloudFormationStack",
@@ -171,16 +174,20 @@ export const resumeData: ResumeData = {
         "SAM 2",
         "REST API",
       ],
+      image: "/projects/triage.png",
+      link: "https://devpost.com/software/triage-k7vr5n",
     },
     {
       name: "ClinicChatBot",
       date: "July 2023",
       description:
-        "Full-stack RAG chatbot application with fine-tuned GPT-3.5-turbo to specialize in helping clinic website visitors",
+        "Full-stack RAG chatbot with fine-tuned GPT-3.5-turbo for clinic website visitors. Deployed to a local acupuncture clinic, achieving an 86% reduction in average customer service ticket lifetime.",
       achievements: [
         "Deployed system to a local acupuncture clinic for an 86% reduction in the average customer service ticket lifetime",
       ],
       technologies: ["Flask", "OpenAI API", "ChromaDB"],
+      image: "/projects/clinicchatbot.png",
+      link: "https://github.com/xckev/clinicchatbot",
     },
   ],
 

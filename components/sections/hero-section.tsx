@@ -1,6 +1,6 @@
 import { resumeData } from "@/lib/data/resume-data";
 import { Button } from "@/components/ui/button";
-import { Mail, Linkedin as LinkedinIcon, Github as GithubIcon } from "lucide-react";
+import { FileText, Linkedin as LinkedinIcon, Github as GithubIcon } from "lucide-react";
 import Image from "next/image";
 
 export function HeroSection() {
@@ -34,9 +34,9 @@ export function HeroSection() {
             </p>
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
               <Button asChild variant="outline" size="sm" className="gap-2">
-                <a href={`mailto:${personalInfo.email}`}>
-                  <Mail className="h-4 w-4" />
-                  Email Me
+                <a href="/Kevin_Xiao_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                  <FileText className="h-4 w-4" />
+                  Resume
                 </a>
               </Button>
               <Button asChild variant="outline" size="sm" className="gap-2">
