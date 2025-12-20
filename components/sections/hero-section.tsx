@@ -2,6 +2,7 @@ import { resumeData } from "@/lib/data/resume-data";
 import { Button } from "@/components/ui/button";
 import { FileText, Linkedin as LinkedinIcon, Github as GithubIcon } from "lucide-react";
 import Image from "next/image";
+import { SpotifyNowPlaying } from "@/components/spotify-now-playing";
 
 export function HeroSection() {
   const { personalInfo } = resumeData;
@@ -9,7 +10,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="flex items-center justify-center px-4 pt-16 pb-6 sm:pt-22 sm:pb-8"
+      className="flex items-center justify-center px-4 pt-16 pb-2 sm:pt-22 sm:pb-2"
     >
       <div className="max-w-2xl mx-auto">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
@@ -60,6 +61,8 @@ export function HeroSection() {
                 </a>
               </Button>
             </div>
+
+            <SpotifyNowPlaying />
           </div>
 
         </div>
