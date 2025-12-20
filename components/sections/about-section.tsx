@@ -10,9 +10,9 @@ export function AboutSection() {
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li>• Incoming Software Engineer Intern at Meta</li>
           <li>• Research Assistant in UW RAIVN Lab</li>
-          <li>• Previous SDE Intern at Amazon Web Services and RA at Makeability Lab</li>
+          <li>• USACO Gold Division and 2x AIME Qualifier</li>
           <li>• DJ for local college events, bars, and nightclubs</li>
-          <li>• My hobbies include basketball, snowboarding, and concert-going!</li>
+          <li>• I love basketball, snowboarding, and EDM!</li>
         </ul>
       </div>
     </section>

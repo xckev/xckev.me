@@ -72,7 +72,7 @@ export const resumeData: ResumeData = {
     degrees: ["B.S. Computer Science", "B.A. Mathematics"],
     gpa: 3.91,
     period: "Sept 2023 - June 2027",
-    achievements: ["Dean's List", "USACO Gold", "AIME Qualifier"],
+    achievements: ["Dean's List", "Publication Accepted to ACM IUI"],
     coursework: [
       "Data Structures",
       "Algorithms",
@@ -89,6 +89,17 @@ export const resumeData: ResumeData = {
   },
 
   experiences: [
+    {
+      title: "Incoming Software Engineer Intern",
+      company: "Meta",
+      location: "Menlo Park, CA",
+      period: "Jun 2026 – Sept 2026",
+      description: [
+        "Summer 2026",
+      ],
+      technologies: [],
+      logo: "/logos/metalogo.png",
+    },
     {
       title: "Software Development Engineer Intern",
       company: "Amazon Web Services (AWS)",
@@ -144,6 +155,19 @@ export const resumeData: ResumeData = {
 
   projects: [
     {
+      name: "Discreetly",
+      date: "October 2026",
+      description:
+        "Versatile iOS mobile application that connects users to emergency contacts with ubiquitous phone sensor data and an AI Voice Agent when it isn't convenient to take your phone out. Provides a wide array of discreet triggers like the action button or sudden motion.",
+      achievements: [
+        "Project for Dubhacks 2025",
+        "Used Twilio for calling and Ultravox for AI Agent",
+      ],
+      technologies: ["SwiftUI", "Twilio", "Ultravox", "Gemini API"],
+      image: "/projects/discreetly.png",
+      link: "https://devpost.com/software/discreetly-q9ij40",
+    },
+    {
       name: "Sussi",
       date: "June 2025",
       description:
@@ -188,6 +212,36 @@ export const resumeData: ResumeData = {
       technologies: ["Flask", "OpenAI API", "ChromaDB"],
       image: "/projects/clinicchatbot.png",
       link: "https://github.com/xckev/clinicchatbot",
+    },
+    {
+      name: "CipherBot",
+      date: "November 2022",
+      description:
+        "An open source Discord bot written in Python that does all things Cryptography. CipherBot helps you encrypt/decrypt secret messages to friends, vote in secure polls, check cryptocurrency prices, and more!",
+      achievements: [
+        "An open source Discord bot written in Python that utilizes cryptographic algorithms", 
+        "Inspired by the Stanford Summer Institutes Cryptography/Cryptocurrency Course",
+        "Allows users to encrypt/decrypt messages with Diffie-Hellman Key Exchange and Public Key Encryption",
+        "Emulation of mix-networks and homomorphic encryption for secure voting, a crucial part of modern political integrity",
+        "Retrieves cryptocurrency prices from coinmarketcap.com",
+      ],
+      technologies: ["Discord API", "CoinMarketCap API", "Microsoft SEAL Homomorphic Encryption"],
+      image: "/projects/cipherbot.png",
+      link: "https://github.com/xckev/CipherBot",
+    },
+    {
+      name: "Lavablock",
+      date: "September 2020",
+      description:
+        "A simple but fun 2D game run on Java's native graphics engine. The first video game I ever made, introducing myself to many aspects of game design.",
+      achievements: [
+        "A simple but fun 2D game run on Java's native graphics engine", 
+        "A refinement of the first video game I made, which was coded in Python",
+        "Introduced myself to many aspects of game design",
+      ],
+      technologies: ["Java", "Bensound Music"],
+      image: "/projects/lavablock.png",
+      link: "https://github.com/xckev/LavaBlockGame",
     },
   ],
 
