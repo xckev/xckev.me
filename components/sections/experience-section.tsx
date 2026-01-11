@@ -8,10 +8,18 @@ import Image from "next/image";
 
 export function ExperienceSection() {
   const { experiences } = resumeData;
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set());
 
   const toggleExpand = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
+    setExpandedIndices(prev => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
   };
 
   return (
@@ -49,7 +57,7 @@ export function ExperienceSection() {
                         <h3 className="font-semibold text-base text-foreground">
                           {exp.company}
                         </h3>
-                        {expandedIndex === index ? (
+                        {expandedIndices.has(index) ? (
                           <ChevronDown className="h-4 w-4 text-muted-foreground" />
                         ) : (
                           <ChevronRight className="h-4 w-4 text-muted-foreground" />
@@ -67,7 +75,7 @@ export function ExperienceSection() {
               </div>
 
               {/* Collapsible Content */}
-              {expandedIndex === index && (
+              {expandedIndices.has(index) && (
                 <div className="mt-3 ml-16 space-y-1">
                   <ul className="space-y-1.5">
                     {exp.description.map((desc, i) => (

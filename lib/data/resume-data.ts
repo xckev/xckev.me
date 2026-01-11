@@ -50,7 +50,7 @@ export interface Skills {
 
 export interface ResumeData {
   personalInfo: PersonalInfo;
-  education: Education;
+  education: Education[];
   experiences: Experience[];
   projects: Project[];
   skills: Skills;
@@ -74,27 +74,29 @@ export const resumeData: ResumeData = {
     ],
   },
 
-  education: {
-    institution: "University of Washington",
-    location: "Seattle, WA",
-    degrees: ["B.S. Computer Science", "B.A. Mathematics"],
-    gpa: 3.91,
-    period: "Sept 2023 - June 2027",
-    achievements: ["Dean's List", "Publication Accepted to ACM IUI"],
-    coursework: [
-      "Data Structures",
-      "Algorithms",
-      "Artificial Intelligence",
-      "Numerical Analysis",
-      "Machine Learning",
-      "Software Design & Implementation",
-      "Computer Vision",
-      "Systems Programming",
-      "Software Tools",
-      "Discrete Math",
-    ],
-    logo: "/logos/uw.png",
-  },
+  education: [
+    {
+      institution: "University of Washington",
+      location: "Seattle, WA",
+      degrees: ["B.S. Computer Science", "B.A. Mathematics"],
+      gpa: 3.91,
+      period: "Sept 2023 - June 2027",
+      achievements: ["Dean's List", "Publication Accepted to ACM IUI"],
+      coursework: [
+        "Data Structures",
+        "Algorithms",
+        "Artificial Intelligence",
+        "Numerical Analysis",
+        "Machine Learning",
+        "Software Design & Implementation",
+        "Computer Vision",
+        "Systems Programming",
+        "Software Tools",
+        "Discrete Math",
+      ],
+      logo: "/logos/uw.png",
+    },
+  ],
 
   experiences: [
     {
