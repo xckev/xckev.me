@@ -6,6 +6,7 @@ export interface PersonalInfo {
   email: string;
   linkedin: string;
   github: string;
+  abouts: string[];
 }
 
 export interface Education {
@@ -64,6 +65,13 @@ export const resumeData: ResumeData = {
     email: "xckevin@cs.washington.edu",
     linkedin: "linkedin.com/in/xckev",
     github: "github.com/xckev",
+    abouts: [
+      "Incoming Software Engineer Intern at Meta",
+      "Research Assistant in UW RAIVN Lab",
+      "USACO Gold Division and 2x AIME Qualifier",
+      "DJ for local college events, bars, and nightclubs",
+      "I love basketball, snowboarding, and EDM!"
+    ],
   },
 
   education: {
