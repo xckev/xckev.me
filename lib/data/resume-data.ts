@@ -103,9 +103,9 @@ export const resumeData: ResumeData = {
       title: "Incoming Software Engineer Intern",
       company: "Meta",
       location: "Menlo Park, CA",
-      period: "Jun 2026 – Sept 2026",
+      period: "2026",
       description: [
-        "Summer 2026",
+        "2026",
       ],
       technologies: [],
       logo: "/logos/metalogo.png",
