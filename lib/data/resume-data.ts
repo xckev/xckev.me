@@ -105,7 +105,7 @@ export const resumeData: ResumeData = {
       location: "Menlo Park, CA",
       period: "2026",
       description: [
-        "2026",
+        "Summer 2026 - BizAI Foundational Cloud API",
       ],
       technologies: [],
       logo: "/logos/metalogo.png",
