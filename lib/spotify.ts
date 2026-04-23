@@ -46,9 +46,6 @@ async function refreshAccessToken(): Promise<string> {
 
   const data: SpotifyTokenResponse = await response.json();
 
-  console.log("Access Token Response:");
-  console.log(data);
-
   // Cache token (expires_in is in seconds, convert to ms)
   // Subtract 300s (5 minutes) buffer to refresh before expiry
   cachedAccessToken = data.access_token;
@@ -90,9 +87,6 @@ export async function getRecentlyPlayed(): Promise<RecentlyPlayedTrack> {
 
   const data: SpotifyRecentlyPlayedResponse = await response.json();
 
-  console.log("Recently Played Response:");
-  console.log(data);
-
   if (!data.items || data.items.length === 0) {
     throw new Error("No recently played tracks found");
   }
@@ -104,8 +98,6 @@ export async function getRecentlyPlayed(): Promise<RecentlyPlayedTrack> {
   const albumArt = track.album.images.reduce((smallest, img) =>
     img.height < smallest.height ? img : smallest
   ).url;
-
-   console.log("Track Name: " + track.name);
 
   return {
     name: track.name,
