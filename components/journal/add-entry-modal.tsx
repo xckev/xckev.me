@@ -80,7 +80,7 @@ export function AddEntryModal({ onClose, onSuccess }: AddEntryModalProps) {
         setError(data.error ?? "Failed to save entry. Please try again.");
       }
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError("Network error");
     } finally {
       setSubmitting(false);
     }

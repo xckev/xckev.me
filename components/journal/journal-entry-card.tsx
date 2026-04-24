@@ -23,11 +23,12 @@ function formatDate(dateStr: string) {
 export function JournalEntryCard({ entry, onDeleted }: JournalEntryCardProps) {
   const [deleting, setDeleting] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const handleDelete = async () => {
     if (!confirmDelete) {
       setConfirmDelete(true);
-      // Auto-reset confirm state after 3s if user doesn't follow through
+      setDeleteError(null);
       setTimeout(() => setConfirmDelete(false), 3000);
       return;
     }
@@ -36,14 +37,23 @@ export function JournalEntryCard({ entry, onDeleted }: JournalEntryCardProps) {
       const res = await fetch(`/api/journal/entries/${entry._id}`, {
         method: "DELETE",
       });
-      if (res.ok) onDeleted(entry._id);
+      if (res.ok) {
+        onDeleted(entry._id);
+      } else if (res.status === 401) {
+        setDeleteError("Session expired");
+      } else if (res.status === 404) {
+        setDeleteError("This entry no longer exists.");
+      } else {
+        setDeleteError("Failed to delete");
+      }
     } catch {
-      // ignore
+      setDeleteError("Network error");
     } finally {
       setDeleting(false);
       setConfirmDelete(false);
     }
   };
+
 
   return (
     <article
@@ -106,10 +116,14 @@ export function JournalEntryCard({ entry, onDeleted }: JournalEntryCardProps) {
       </div>
 
       {/* Confirm delete hint */}
-      {confirmDelete && (
+      {confirmDelete && !deleteError && (
         <p className="px-5 pb-4 text-xs text-destructive">
           Tap delete again to permanently remove this memory.
         </p>
+      )}
+      {/* Delete error */}
+      {deleteError && (
+        <p className="px-5 pb-4 text-xs text-destructive">{deleteError}</p>
       )}
     </article>
   );
