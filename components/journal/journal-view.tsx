@@ -36,12 +36,12 @@ export function JournalView() {
     try {
       const res = await fetch(`/api/journal/entries?page=${p}&limit=${FEED_LIMIT}`);
       if (res.status === 401) {
-        setError("Your session has expired — refresh the page to log back in.");
+        setError("Your session has expired");
         return;
       }
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        setError(data.error ?? `Server error (${res.status}) — please try again.`);
+        setError(data.error ?? `Server error (${res.status})`);
         return;
       }
       const data: PaginatedResponse = await res.json();
@@ -51,7 +51,7 @@ export function JournalView() {
       setPage(data.page);
       setTotalPages(data.totalPages);
     } catch {
-      setError("Could not reach the server — check your connection and try again.");
+      setError("Could not reach the server.");
     } finally {
       setLoading(false);
       setLoadingMore(false);
