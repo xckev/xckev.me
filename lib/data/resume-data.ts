@@ -67,6 +67,7 @@ export const resumeData: ResumeData = {
     github: "github.com/xckev",
     abouts: [
       "Incoming Software Engineer Intern at Meta",
+      "Incoming Member of Technical Staff Intern at OpenAI",
       "Research Assistant in UW RAIVN Lab",
       "USACO Gold Division and 2x AIME Qualifier",
       "DJ for local college events, bars, and nightclubs",
@@ -79,7 +80,7 @@ export const resumeData: ResumeData = {
       institution: "University of Washington",
       location: "Seattle, WA",
       degrees: ["B.S. Computer Science", "B.A. Mathematics"],
-      gpa: 3.91,
+      gpa: 3.92,
       period: "Sept 2023 - June 2027",
       achievements: ["Dean's List", "Publication Accepted to ACM IUI"],
       coursework: [
@@ -90,6 +91,9 @@ export const resumeData: ResumeData = {
         "Machine Learning",
         "Software Design & Implementation",
         "Computer Vision",
+        "Natural Language Processing",
+        "Deep Learning",
+        "Linear Optimization",
         "Systems Programming",
         "Software Tools",
         "Discrete Math",
@@ -100,12 +104,23 @@ export const resumeData: ResumeData = {
 
   experiences: [
     {
-      title: "Incoming Software Engineer Intern",
+      title: "Member of Technical Staff Intern",
+      company: "OpenAI",
+      location: "Bellevue, WA",
+      period: "2026",
+      description: [
+        "Incoming Fall 2026 - Applied AI",
+      ],
+      technologies: [],
+      logo: "/logos/openai.png",
+    },
+    {
+      title: "Software Engineer Intern",
       company: "Meta",
       location: "Menlo Park, CA",
       period: "2026",
       description: [
-        "Summer 2026 - BizAI Foundational Cloud API",
+        "Incoming Summer 2026 - BizAI Foundational Cloud API",
       ],
       technologies: [],
       logo: "/logos/metalogo.png",
@@ -168,6 +183,19 @@ export const resumeData: ResumeData = {
   ],
 
   projects: [
+    {
+      name: "Flowstate Calendar",
+      date: "April 2026",
+      description:
+        "Your personal AI secretary that optimizes your day for you. Simply jot down your messy to-dos or thoughts, and Flowstate will bias towards human-like assumptions to schedule you for maximum productivity.",
+      achievements: [
+        "Project for LAHacks 2026",
+        "Fully hosted production web app",
+      ],
+      technologies: ["Gemini API", "Next.js", "FastAPI", "MongoDB", "GCal API"],
+      image: "/projects/flowstate.png",
+      link: "https://www.flowstate-calendar.work/",
+    },
     {
       name: "Discreetly",
       date: "October 2026",
