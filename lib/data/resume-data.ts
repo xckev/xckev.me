@@ -107,7 +107,7 @@ export const resumeData: ResumeData = {
       title: "Member of Technical Staff Intern",
       company: "OpenAI",
       location: "Bellevue, WA",
-      period: "2026",
+      period: "Sept 2026 - Dec 2026",
       description: [
         "Incoming Fall 2026 - Applied AI",
       ],
@@ -118,7 +118,7 @@ export const resumeData: ResumeData = {
       title: "Software Engineer Intern",
       company: "Meta",
       location: "Menlo Park, CA",
-      period: "2026",
+      period: "June 2026 – Sept 2026",
       description: [
         "Incoming Summer 2026 - BizAI Foundational Cloud API",
       ],
