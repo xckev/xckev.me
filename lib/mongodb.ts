@@ -6,7 +6,6 @@ if (!uri) throw new Error("Missing MONGODB_URI environment variable");
 // Module-level singleton so the connection is reused across hot-reloads in dev
 // and across serverless function invocations in production.
 declare global {
-  // eslint-disable-next-line no-var
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
