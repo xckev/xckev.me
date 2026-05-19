@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAuth } from "@/lib/journal-auth";
 import { getJournalDb } from "@/lib/mongodb";
+import { parseDateInputAsUtc } from "@/lib/journal-date";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -75,6 +76,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const entryDate = parseDateInputAsUtc(date);
+    if (!entryDate) {
+      return NextResponse.json({ error: "Date must be a valid YYYY-MM-DD value" }, { status: 400 });
+    }
+
     const validPosters = ["Kevin", "Ashley"];
     if (!poster || !validPosters.includes(poster)) {
       return NextResponse.json({ error: "Poster is required (Kevin or Ashley)" }, { status: 400 });
@@ -102,7 +108,7 @@ export async function POST(request: NextRequest) {
 
     const result = await collection.insertOne({
       title: title.trim(),
-      date: new Date(date),
+      date: entryDate,
       notes: notes?.trim() ?? "",
       poster: poster ?? null,
       imageData,
