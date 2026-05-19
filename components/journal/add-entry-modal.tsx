@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { X, Upload, Image as ImageIcon, Calendar, Type, FileText, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { JournalPoster } from "@/types/journal";
+import { getLocalDateInputValue } from "@/lib/journal-date";
 
 interface AddEntryModalProps {
   onClose: () => void;
@@ -12,9 +13,7 @@ interface AddEntryModalProps {
 
 export function AddEntryModal({ onClose, onSuccess }: AddEntryModalProps) {
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+  const [date, setDate] = useState(getLocalDateInputValue);
   const [notes, setNotes] = useState("");
   const [poster, setPoster] = useState<JournalPoster | "">("");
   const [imageFile, setImageFile] = useState<File | null>(null);

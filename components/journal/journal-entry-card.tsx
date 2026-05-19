@@ -4,20 +4,11 @@ import { useState } from "react";
 import { Trash2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { JournalEntry } from "@/types/journal";
-
+import { formatJournalDate } from "@/lib/journal-date";
 
 interface JournalEntryCardProps {
   entry: JournalEntry;
   onDeleted: (id: string) => void;
-}
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
 }
 
 export function JournalEntryCard({ entry, onDeleted }: JournalEntryCardProps) {
@@ -66,7 +57,7 @@ export function JournalEntryCard({ entry, onDeleted }: JournalEntryCardProps) {
           <div className="flex items-center gap-1.5 shrink-0">
             <Calendar className="h-3.5 w-3.5 text-pink-400" />
             <span className="text-sm text-muted-foreground">
-              {formatDate(entry.date)}
+              {formatJournalDate(entry.date)}
             </span>
           </div>
           {entry.poster && (
