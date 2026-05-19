@@ -3,14 +3,30 @@ import type {
   SpotifyRecentlyPlayedResponse,
   RecentlyPlayedTrack,
 } from "@/types/spotify";
-
-// In-memory cache for access token
-let cachedAccessToken: string | null = null;
-let tokenExpiryTime: number | null = null;
+import { getRedis } from "@/lib/redis";
 
 const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token";
 const SPOTIFY_RECENTLY_PLAYED_URL =
   "https://api.spotify.com/v1/me/player/recently-played";
+const SPOTIFY_ACCESS_TOKEN_KEY = "spotify:access-token";
+
+async function getCachedAccessToken(): Promise<string | null> {
+  try {
+    return await getRedis().get<string>(SPOTIFY_ACCESS_TOKEN_KEY);
+  } catch (error) {
+    console.warn("Unable to read Spotify access token from Redis:", error);
+    return null;
+  }
+}
+
+async function cacheAccessToken(token: string, expiresInSeconds: number) {
+  try {
+    const ttl = Math.max(expiresInSeconds - 300, 60);
+    await getRedis().setex(SPOTIFY_ACCESS_TOKEN_KEY, ttl, token);
+  } catch (error) {
+    console.warn("Unable to cache Spotify access token in Redis:", error);
+  }
+}
 
 /**
  * Refreshes the Spotify access token using the refresh token
@@ -46,10 +62,7 @@ async function refreshAccessToken(): Promise<string> {
 
   const data: SpotifyTokenResponse = await response.json();
 
-  // Cache token (expires_in is in seconds, convert to ms)
-  // Subtract 300s (5 minutes) buffer to refresh before expiry
-  cachedAccessToken = data.access_token;
-  tokenExpiryTime = Date.now() + (data.expires_in - 300) * 1000;
+  await cacheAccessToken(data.access_token, data.expires_in);
 
   return data.access_token;
 }
@@ -58,12 +71,9 @@ async function refreshAccessToken(): Promise<string> {
  * Gets a valid access token (from cache or refreshes)
  */
 async function getAccessToken(): Promise<string> {
-  // Return cached token if still valid
-  if (cachedAccessToken && tokenExpiryTime && Date.now() < tokenExpiryTime) {
-    return cachedAccessToken;
-  }
+  const cachedAccessToken = await getCachedAccessToken();
+  if (cachedAccessToken) return cachedAccessToken;
 
-  // Refresh token if expired or not cached
   return await refreshAccessToken();
 }
 
