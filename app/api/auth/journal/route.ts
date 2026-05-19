@@ -1,24 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { signJwt, setSessionCookie, clearSessionCookie } from "@/lib/journal-auth";
+import { getRedis } from "@/lib/redis";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_WINDOW_SECONDS = 15 * 60;
 const RATE_LIMIT_MAX_ATTEMPTS = 5;
 
 type RateLimitRecord = {
   count: number;
-  resetAt: number;
+  retryAfter: number;
 };
-
-const globalForRateLimit = globalThis as typeof globalThis & {
-  journalAuthAttempts?: Map<string, RateLimitRecord>;
-};
-
-const authAttempts =
-  globalForRateLimit.journalAuthAttempts ?? new Map<string, RateLimitRecord>();
-globalForRateLimit.journalAuthAttempts = authAttempts;
 
 function getClientIdentifier(request: NextRequest): string {
   const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
@@ -27,25 +20,48 @@ function getClientIdentifier(request: NextRequest): string {
   return forwardedFor || realIp || "unknown";
 }
 
-function getRateLimitRecord(identifier: string, now = Date.now()): RateLimitRecord {
-  const record = authAttempts.get(identifier);
-  if (!record || record.resetAt <= now) {
-    const newRecord = { count: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
-    authAttempts.set(identifier, newRecord);
-    return newRecord;
-  }
-
-  return record;
+function getRateLimitKey(identifier: string): string {
+  return `journal:auth:attempts:${identifier}`;
 }
 
-function getRateLimitResponse(record: RateLimitRecord, now = Date.now()) {
-  const retryAfter = Math.max(1, Math.ceil((record.resetAt - now) / 1000));
+async function getRateLimitRecord(identifier: string): Promise<RateLimitRecord> {
+  const redis = getRedis();
+  const key = getRateLimitKey(identifier);
+  const count = Number((await redis.get<number>(key)) ?? 0);
+  const ttl = count > 0 ? await redis.ttl(key) : RATE_LIMIT_WINDOW_SECONDS;
 
+  return {
+    count,
+    retryAfter: ttl > 0 ? ttl : RATE_LIMIT_WINDOW_SECONDS,
+  };
+}
+
+async function recordFailedAttempt(identifier: string): Promise<RateLimitRecord> {
+  const redis = getRedis();
+  const key = getRateLimitKey(identifier);
+  await redis.set(key, 0, { nx: true, ex: RATE_LIMIT_WINDOW_SECONDS });
+
+  const count = await redis.incr(key);
+  let retryAfter = await redis.ttl(key);
+
+  if (retryAfter <= 0) {
+    await redis.expire(key, RATE_LIMIT_WINDOW_SECONDS);
+    retryAfter = RATE_LIMIT_WINDOW_SECONDS;
+  }
+
+  return { count, retryAfter };
+}
+
+async function clearFailedAttempts(identifier: string) {
+  await getRedis().del(getRateLimitKey(identifier));
+}
+
+function getRateLimitResponse(record: RateLimitRecord) {
   return NextResponse.json(
-    { error: "Too many password attempts. Please try again later.", retryAfter },
+    { error: "Too many password attempts. Please try again later.", retryAfter: record.retryAfter },
     {
       status: 429,
-      headers: { "Retry-After": String(retryAfter) },
+      headers: { "Retry-After": String(record.retryAfter) },
     }
   );
 }
@@ -54,7 +70,7 @@ function getRateLimitResponse(record: RateLimitRecord, now = Date.now()) {
 export async function POST(request: NextRequest) {
   try {
     const clientIdentifier = getClientIdentifier(request);
-    const rateLimitRecord = getRateLimitRecord(clientIdentifier);
+    const rateLimitRecord = await getRateLimitRecord(clientIdentifier);
 
     if (rateLimitRecord.count >= RATE_LIMIT_MAX_ATTEMPTS) {
       return getRateLimitResponse(rateLimitRecord);
@@ -74,19 +90,19 @@ export async function POST(request: NextRequest) {
     }
 
     if (password !== correctPassword) {
-      rateLimitRecord.count += 1;
+      const failedAttemptRecord = await recordFailedAttempt(clientIdentifier);
 
       // Small delay to mitigate brute-force
       await new Promise((r) => setTimeout(r, 300));
 
-      if (rateLimitRecord.count >= RATE_LIMIT_MAX_ATTEMPTS) {
-        return getRateLimitResponse(rateLimitRecord);
+      if (failedAttemptRecord.count >= RATE_LIMIT_MAX_ATTEMPTS) {
+        return getRateLimitResponse(failedAttemptRecord);
       }
 
       return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
     }
 
-    authAttempts.delete(clientIdentifier);
+    await clearFailedAttempts(clientIdentifier);
 
     const token = await signJwt();
     const response = NextResponse.json({ ok: true });
