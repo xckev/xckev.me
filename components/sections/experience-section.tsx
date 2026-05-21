@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { resumeData } from "@/lib/data/resume-data";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -100,11 +99,9 @@ export function ExperienceSection() {
 
         {hasMoreExperiences && (
           <div className="mt-3 flex justify-center">
-            <Button
+            <button
               type="button"
-              variant="secondary"
-              size="sm"
-              className="bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               onClick={() => setShowAllExperiences((current) => !current)}
               aria-expanded={showAllExperiences}
             >
@@ -114,7 +111,7 @@ export function ExperienceSection() {
                   showAllExperiences ? "rotate-180" : ""
                 }`}
               />
-            </Button>
+            </button>
           </div>
         )}
       </div>
