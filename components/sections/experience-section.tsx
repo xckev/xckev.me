@@ -6,9 +6,16 @@ import { Separator } from "@/components/ui/separator";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
+const INITIAL_EXPERIENCE_COUNT = 5;
+
 export function ExperienceSection() {
   const { experiences } = resumeData;
   const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set());
+  const [showAllExperiences, setShowAllExperiences] = useState(false);
+  const visibleExperiences = showAllExperiences
+    ? experiences
+    : experiences.slice(0, INITIAL_EXPERIENCE_COUNT);
+  const hasMoreExperiences = experiences.length > INITIAL_EXPERIENCE_COUNT;
 
   const toggleExpand = (index: number) => {
     setExpandedIndices(prev => {
@@ -29,7 +36,7 @@ export function ExperienceSection() {
         <Separator className="mb-6" />
 
         <div className="space-y-4">
-          {experiences.map((exp, index) => (
+          {visibleExperiences.map((exp, index) => (
             <div key={index} className="border-b border-border pb-4 last:border-b-0">
               <div
                 className="flex items-start gap-4 cursor-pointer"
@@ -89,6 +96,24 @@ export function ExperienceSection() {
             </div>
           ))}
         </div>
+
+        {hasMoreExperiences && (
+          <div className="mt-3 flex justify-center">
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              onClick={() => setShowAllExperiences((current) => !current)}
+              aria-expanded={showAllExperiences}
+            >
+              {showAllExperiences ? "Show fewer experiences" : "Show all experiences"}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${
+                  showAllExperiences ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

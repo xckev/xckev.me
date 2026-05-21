@@ -129,7 +129,7 @@ export const resumeData: ResumeData = {
       title: "Research Assistant",
       company: "RAIVN Lab",
       location: "Seattle, WA",
-      period: "Dec 2026 – Present",
+      period: "Dec 2025 – Present",
       description: [
         "🔬 Radiomic and Spatial Models for Agentic Medical Research",
       ],
