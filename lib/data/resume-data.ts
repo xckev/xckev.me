@@ -140,7 +140,7 @@ export const resumeData: ResumeData = {
       title: "Software Development Engineer Intern",
       company: "Amazon Web Services (AWS)",
       location: "Seattle, WA",
-      period: "Jun 2025 – Sept 2025",
+      period: "June 2025 – Sept 2025",
       description: [
         "🛠️ Amazon Connect - Agentic AI Tools",
       ],
@@ -151,7 +151,7 @@ export const resumeData: ResumeData = {
       title: "Research Assistant",
       company: "Makeability Lab",
       location: "Seattle, WA",
-      period: "Jun 2024 – March 2025",
+      period: "June 2024 – Mar 2025",
       description: [
         "🎨 ArtInsight - GenAI to supplement BLV interactions with visual artwork",
       ],
@@ -162,7 +162,7 @@ export const resumeData: ResumeData = {
       title: "Software Subsystem Lead",
       company: "Husky Satellite Lab",
       location: "Seattle, WA",
-      period: "Apr 2024 – August 2025",
+      period: "Apr 2024 – Aug 2025",
       description: [
         "🛰️ Star Tracker for HuskySat-2",
       ],
