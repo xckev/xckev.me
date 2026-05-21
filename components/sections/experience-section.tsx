@@ -99,11 +99,12 @@ export function ExperienceSection() {
         </div>
 
         {hasMoreExperiences && (
-          <div className="mt-6 flex justify-center">
+          <div className="mt-3 flex justify-center">
             <Button
               type="button"
-              variant="ghost"
+              variant="secondary"
               size="sm"
+              className="bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               onClick={() => setShowAllExperiences((current) => !current)}
               aria-expanded={showAllExperiences}
             >
