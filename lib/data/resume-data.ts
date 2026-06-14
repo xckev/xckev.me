@@ -120,7 +120,7 @@ export const resumeData: ResumeData = {
       location: "Menlo Park, CA",
       period: "June 2026 – Sept 2026",
       description: [
-        "Incoming Summer 2026 - Communications Platform: Conversation",
+        "Incoming Summer 2026 - Communications Platform: Conversation Management",
       ],
       technologies: [],
       logo: "/logos/metalogo.png",
