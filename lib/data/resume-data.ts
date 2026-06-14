@@ -109,7 +109,7 @@ export const resumeData: ResumeData = {
       location: "Bellevue, WA",
       period: "Sept 2026 - Dec 2026",
       description: [
-        "Incoming Fall 2026 - Applied AI",
+        "Incoming Fall 2026 - Applied AI Org",
       ],
       technologies: [],
       logo: "/logos/openai.png",
@@ -120,7 +120,7 @@ export const resumeData: ResumeData = {
       location: "Menlo Park, CA",
       period: "June 2026 – Sept 2026",
       description: [
-        "Incoming Summer 2026 - BizAI Foundational Cloud API",
+        "Incoming Summer 2026 - Communications Platform: Conversation",
       ],
       technologies: [],
       logo: "/logos/metalogo.png",
@@ -131,7 +131,7 @@ export const resumeData: ResumeData = {
       location: "Seattle, WA",
       period: "Dec 2025 – Present",
       description: [
-        "🔬 Radiomic and Spatial Models for Agentic Medical Research",
+        "🔬 MolmoHealth - Open Source Medical Position-Reasoning VLM",
       ],
       technologies: [],
       logo: "/logos/raivn.png",
