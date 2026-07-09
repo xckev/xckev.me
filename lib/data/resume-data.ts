@@ -66,12 +66,11 @@ export const resumeData: ResumeData = {
     linkedin: "linkedin.com/in/xckev",
     github: "github.com/xckev",
     abouts: [
-      "Incoming Software Engineer Intern at Meta",
+      "Software Engineer Intern at Meta",
       "Incoming Member of Technical Staff Intern at OpenAI",
-      "Research Assistant in UW RAIVN Lab",
       "USACO Gold Division and 2x AIME Qualifier",
-      "DJ for local college events, bars, and nightclubs",
-      "I love basketball, snowboarding, and EDM!"
+      "Interested in AI/ML research and startups",
+      "DJ for local college events, bars, and nightclubs"
     ],
   },
 
@@ -120,7 +119,7 @@ export const resumeData: ResumeData = {
       location: "Menlo Park, CA",
       period: "June 2026 – Sept 2026",
       description: [
-        "Incoming Summer 2026 - Communications Platform: Conversation Management",
+        "Business Messaging Platform",
       ],
       technologies: [],
       logo: "/logos/metalogo.png",
@@ -131,7 +130,7 @@ export const resumeData: ResumeData = {
       location: "Seattle, WA",
       period: "Dec 2025 – Present",
       description: [
-        "🔬 MolmoHealth - Open Source Medical Position-Reasoning VLM",
+        "🔬 MolmoHealth - Open Source Medical Position-Reasoning",
       ],
       technologies: [],
       logo: "/logos/raivn.png",
