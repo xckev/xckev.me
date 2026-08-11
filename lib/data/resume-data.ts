@@ -79,7 +79,7 @@ export const resumeData: ResumeData = {
       institution: "University of Washington",
       location: "Seattle, WA",
       degrees: ["B.S. Computer Science", "B.A. Mathematics"],
-      gpa: 3.92,
+      gpa: 3.93,
       period: "Sept 2023 - June 2027",
       achievements: ["Dean's List", "Publication Accepted to ACM IUI"],
       coursework: [
@@ -128,7 +128,7 @@ export const resumeData: ResumeData = {
       title: "Research Assistant",
       company: "RAIVN Lab",
       location: "Seattle, WA",
-      period: "Dec 2025 – Present",
+      period: "Dec 2025 – June 2026",
       description: [
         "🔬 MolmoHealth - Open Source Medical Position-Reasoning",
       ],
@@ -294,6 +294,9 @@ export const resumeData: ResumeData = {
       "C",
       "JavaScript",
       "TypeScript",
+      "PHP",
+      "Hack",
+      "Rust",
       "HTML/CSS",
       "Swift",
       "SQL",
