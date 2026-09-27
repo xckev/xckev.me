@@ -66,8 +66,7 @@ export const resumeData: ResumeData = {
     linkedin: "linkedin.com/in/xckev",
     github: "github.com/xckev",
     abouts: [
-      "Software Engineer Intern at Meta",
-      "Incoming Member of Technical Staff Intern at OpenAI",
+      "Member of Technical Staff Intern at OpenAI",
       "USACO Gold Division and 2x AIME Qualifier",
       "Interested in AI/ML research and startups",
       "DJ for local college events, bars, and nightclubs"
@@ -108,7 +107,7 @@ export const resumeData: ResumeData = {
       location: "Bellevue, WA",
       period: "Sept 2026 - Dec 2026",
       description: [
-        "Incoming Fall 2026 - Applied AI Org",
+        "Ads & Monetization",
       ],
       technologies: [],
       logo: "/logos/openai.png",
